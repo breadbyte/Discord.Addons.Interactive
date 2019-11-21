@@ -24,6 +24,7 @@ namespace Discord.Addons.Interactive
         public Task<IUserMessage> ReplyAndDeleteAsync(string content, bool isTTS = false, Embed embed = null, TimeSpan? timeout = null, RequestOptions options = null)
             => Interactive.ReplyAndDeleteAsync(Context, content, isTTS, embed, timeout, options);
 
+        /*
         public Task<IUserMessage> PagedReplyAsync(IEnumerable<object> pages, bool fromSourceUser = true)
         {
             var pager = new PaginatedMessage
@@ -32,15 +33,16 @@ namespace Discord.Addons.Interactive
             };
             return PagedReplyAsync(pager, fromSourceUser);
         }
-        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, bool fromSourceUser = true)
+        */
+        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, PaginatedMessageCallback callback, bool fromSourceUser = true)
         {
             var criterion = new Criteria<SocketReaction>();
             if (fromSourceUser)
                 criterion.AddCriterion(new EnsureReactionFromSourceUserCriterion());
-            return PagedReplyAsync(pager, criterion);
+            return PagedReplyAsync(pager, callback.GetType(), criterion);
         }
-        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, ICriterion<SocketReaction> criterion)
-            => Interactive.SendPaginatedMessageAsync(Context, pager, criterion);
+        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, Type callback, ICriterion<SocketReaction> criterion)
+            => Interactive.SendPaginatedMessageAsync(Context, pager, callback, criterion);
 
         public RuntimeResult Ok(string reason = null) => new OkResult(reason);
     }

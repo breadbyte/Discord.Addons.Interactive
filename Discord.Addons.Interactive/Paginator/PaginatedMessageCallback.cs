@@ -6,7 +6,7 @@ using Discord.WebSocket;
 
 namespace Discord.Addons.Interactive
 {
-    public class PaginatedMessageCallback : IReactionCallback
+    public abstract class PaginatedMessageCallback : IReactionCallback
     {
         public SocketCommandContext Context { get; }
         public InteractiveService Interactive { get; private set; }
@@ -36,7 +36,12 @@ namespace Discord.Addons.Interactive
             pages = _pager.Pages.Count();
         }
 
-        public async Task DisplayAsync()
+        public PaginatedMessageCallback()
+        {
+            
+        }
+
+        public virtual async Task DisplayAsync()
         {
             var embed = BuildEmbed();
             var message = await Context.Channel.SendMessageAsync(_pager.Content, embed: embed).ConfigureAwait(false);
@@ -74,7 +79,7 @@ namespace Discord.Addons.Interactive
             }
         }
 
-        public async Task<bool> HandleCallbackAsync(SocketReaction reaction)
+        public virtual async Task<bool> HandleCallbackAsync(SocketReaction reaction)
         {
             var emote = reaction.Emote;
 
@@ -130,7 +135,7 @@ namespace Discord.Addons.Interactive
             return false;
         }
         
-        protected Embed BuildEmbed()
+        public virtual Embed BuildEmbed()
         {
             return new EmbedBuilder()
                 .WithAuthor(_pager.Author)
@@ -140,7 +145,7 @@ namespace Discord.Addons.Interactive
                 .WithTitle(_pager.Title)
                 .Build();
         }
-        private async Task RenderAsync()
+        public virtual async Task RenderAsync()
         {
             var embed = BuildEmbed();
             await Message.ModifyAsync(m => m.Embed = embed).ConfigureAwait(false);

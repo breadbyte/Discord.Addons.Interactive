@@ -2,16 +2,16 @@
 
 namespace Discord.Addons.Interactive
 {
-    public class PaginatedMessage
+    public abstract class PaginatedMessage
     {
-        public IEnumerable<object> Pages { get; set; }
+        public virtual List<object> Pages { get; set; }
 
-        public string Content { get; set; } = "";
+        public virtual string Content { get; set; } = "";
 
-        public EmbedAuthorBuilder Author { get; set; } = null;
-        public Color Color { get; set; } = Color.Default;
-        public string Title { get; set; } = "";
+        public virtual EmbedAuthorBuilder Author { get; set; } = null;
+        public virtual Color Color { get; set; } = Color.Default;
+        public virtual string Title { get; set; } = "";
 
-        public PaginatedAppearanceOptions Options { get; set; } = PaginatedAppearanceOptions.Default;
+        public virtual PaginatedAppearanceOptions Options { get; set; } = null;
     }
 }

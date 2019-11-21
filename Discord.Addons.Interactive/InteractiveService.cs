@@ -97,9 +97,10 @@ namespace Discord.Addons.Interactive
 
         public async Task<IUserMessage> SendPaginatedMessageAsync(SocketCommandContext context, 
             PaginatedMessage pager, 
+            Type callbacktype,
             ICriterion<SocketReaction> criterion = null)
         {
-            var callback = new PaginatedMessageCallback(this, context, pager, criterion);
+            var callback = (PaginatedMessageCallback)Activator.CreateInstance(callbacktype, this, context, pager, criterion);
             await callback.DisplayAsync().ConfigureAwait(false);
             return callback.Message;
         }
