@@ -28,7 +28,7 @@ namespace Discord.Addons.Interactive
         {
             var pager = new PaginatedMessage
             {
-                Pages = pages
+                EmbedDescriptionOrEmbedFieldBuilder = pages
             };
             return PagedReplyAsync(pager, fromSourceUser);
         }

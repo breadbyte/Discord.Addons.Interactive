@@ -34,9 +34,9 @@ namespace Discord.Addons.Interactive
             Context = sourceContext;
             _criterion = criterion ?? new EmptyCriterion<SocketReaction>();
             _pager = pager;
-            pages = _pager.Pages.Count();
-            if (_pager.Pages is IEnumerable<EmbedFieldBuilder>)
-                pages = ((_pager.Pages.Count() - 1) / options.FieldsPerPage) + 1;
+            pages = _pager.EmbedDescriptionOrEmbedFieldBuilder.Count();
+            if (_pager.EmbedDescriptionOrEmbedFieldBuilder is IEnumerable<EmbedFieldBuilder>)
+                pages = ((_pager.EmbedDescriptionOrEmbedFieldBuilder.Count() - 1) / options.FieldsPerPage) + 1;
         }
 
         public async Task DisplayAsync()
@@ -133,23 +133,26 @@ namespace Discord.Addons.Interactive
             return false;
         }
         
-        protected virtual Embed BuildEmbed()
-        {
+        protected virtual Embed BuildEmbed() {
             var builder = new EmbedBuilder()
-                .WithAuthor(_pager.Author)
-                .WithColor(_pager.Color)
-                .WithFooter(f => f.Text = string.Format(options.FooterFormat, page, pages))
-                .WithTitle(_pager.Title);
-            if (_pager.Pages is IEnumerable<EmbedFieldBuilder> efb)
+                          .WithAuthor(_pager.Author)
+                          .WithColor(_pager.Color)
+                          .WithFooter(f => f.Text = string.Format(options.FooterFormat, page, pages))
+                          .WithTitle(_pager.Title);
+            if (_pager.EmbedDescriptionOrEmbedFieldBuilder is IEnumerable<EmbedFieldBuilder> efb)
             {
                 builder.Fields = efb.Skip((page - 1) * options.FieldsPerPage).Take(options.FieldsPerPage).ToList();
                 builder.Description = _pager.AlternateDescription;
             } 
             else
             {
-                builder.Description = _pager.Pages.ElementAt(page - 1).ToString();
+                builder.Description = _pager.EmbedDescriptionOrEmbedFieldBuilder.ElementAt(page - 1).ToString();
             }
-            
+
+            if (_pager.ImageUrls != null) {
+                builder.ImageUrl = _pager.ImageUrls.ElementAt(page - 1);
+            }
+
             return builder.Build();
         }
         private async Task RenderAsync()

@@ -14,7 +14,9 @@ namespace Discord.Addons.Interactive
         /// batches of <see cref="PaginatedAppearanceOptions.FieldsPerPage"/>, and the
         /// embed's description will be populated with the <see cref="AlternateDescription"/> field.
         /// </summary>
-        public IEnumerable<object> Pages { get; set; }
+        public IEnumerable<object> EmbedDescriptionOrEmbedFieldBuilder { get; set; }
+        
+        public IEnumerable<string> ImageUrls { get; set; }
 
         /// <summary>
         /// Content sets the content of the message, displayed above the embed. This may remain empty.
@@ -29,7 +31,7 @@ namespace Discord.Addons.Interactive
         public string Title { get; set; } = "";
         /// <summary>
         /// AlternateDescription will be used as the description of the pager only when
-        /// <see cref="Pages"/> is a collection of <see cref="EmbedFieldBuilder"/>.
+        /// <see cref="EmbedDescriptionOrEmbedFieldBuilder"/> is a collection of <see cref="EmbedFieldBuilder"/>.
         /// </summary>
         public string AlternateDescription { get; set; } = "";
 
