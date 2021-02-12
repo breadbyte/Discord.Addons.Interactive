@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Authors>foxbot</Authors>
+    <Authors>breadbyte</Authors>
     
-    <PackageId>Discord.Addons.Interactive</PackageId>
+    <PackageId>breadbyte.Discord.Addons.Interactive</PackageId>
     <PackageLicenseUrl>https://opensource.org/licenses/isc</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/foxbot/Discord.Addons.Interactive</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/breadbyte/Discord.Addons.Interactive</PackageProjectUrl>
     <PackageTags>discord;discord.net</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>git://github.com/foxbot/Discord.Addons.Interactive</RepositoryUrl>
-    <PackageIconUrl>https://github.com/foxbot/Discord.Addons.Interactive/raw/master/marketing/PackageLogo.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/breadbyte/Discord.Addons.Interactive</RepositoryUrl>
+    <PackageIconUrl>https://github.com/breadbyte/Discord.Addons.Interactive/raw/master/marketing/PackageLogo.png</PackageIconUrl>
 
     <VersionPrefix Condition=" '$(Version)' != '' ">$(Version)</VersionPrefix>
     <VersionPrefix Condition=" '$(Version)' == '' ">0.0.0-dev</VersionPrefix>
@@ -17,6 +17,10 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <LangVersion>9</LangVersion>
+
+    <Description>A fork of github.com/foxbot/Discord.Addons.Interactive</Description>
+
+    <PackageVersion>0.0.0-dev-028fe73</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
