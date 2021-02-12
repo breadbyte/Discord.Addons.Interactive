@@ -20,7 +20,7 @@
 
     <Description>A fork of github.com/foxbot/Discord.Addons.Interactive</Description>
 
-    <PackageVersion>0.0.0-dev-028fe73</PackageVersion>
+    <PackageVersion>0.0.0-dev-e059c7b</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
